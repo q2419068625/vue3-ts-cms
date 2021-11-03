@@ -13,25 +13,27 @@ import {
   ElButton,
   ElTable,
   ElAlert,
-  ElAside,
-  ElAutocomplete,
-  ElAvatar,
-  ElBacktop,
   ElTabs,
   ElTabPane,
-  ElIcon
+  ElIcon,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElCheckbox,
+  ElLink
 } from 'element-plus'
 const components = [
   ElButton,
   ElTable,
   ElAlert,
-  ElAside,
-  ElAutocomplete,
-  ElAvatar,
-  ElBacktop,
   ElTabs,
   ElTabPane,
-  ElIcon
+  ElIcon,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElCheckbox,
+  ElLink
 ]
 export function registerElement(app: App): void {
   for (const cpn of components) {
