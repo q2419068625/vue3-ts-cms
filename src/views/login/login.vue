@@ -1,21 +1,27 @@
 <template>
-  <div>
-    <el-button type="primary">Primary</el-button>
-    <h2>{{ $store.state.name }}</h2>
+  <div class="login">
+    <login-panel />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ElButton } from 'element-plus'
+import loginPanel from './components/login-panel.vue'
 export default defineComponent({
-  component() {
-    ElButton
-  },
+  components: { loginPanel },
   setup() {
     return {}
   }
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: url('../../assets/img/login-bg.svg');
+}
+</style>

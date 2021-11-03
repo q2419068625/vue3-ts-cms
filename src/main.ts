@@ -4,6 +4,8 @@ import { registerApp } from '@/global/index'
 import router from '@/router/index'
 import store from '@/store/index'
 import CYRequest from '@/service/index'
+import 'normalize.css'
+import '@/styles/index.scss'
 
 const app = createApp(App)
 
@@ -18,11 +20,3 @@ interface DataType {
   returnCode: string
   success: boolean
 }
-
-CYRequest.request<DataType>({
-  url: '/tiku/dp100110021008-1.html',
-  method: 'GET',
-  showLoading: true
-}).then((res) => {
-  console.log(res)
-})

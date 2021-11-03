@@ -52,7 +52,7 @@ class CYRequest {
     )
   }
 
-  request<T>(config: CYRequestConfig): Promise<T> {
+  request<T>(config: CYRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       if (config.interceptor?.requestInterceptor) {
         config = config.interceptor.requestInterceptor(config)
@@ -75,16 +75,16 @@ class CYRequest {
         })
     })
   }
-  get<T>(config: CYRequestConfig): Promise<T> {
+  get<T>(config: CYRequestConfig<T>): Promise<T> {
     return this.request({ ...config, method: 'GET' })
   }
-  post<T>(config: CYRequestConfig): Promise<T> {
+  post<T>(config: CYRequestConfig<T>): Promise<T> {
     return this.request({ ...config, method: 'POST' })
   }
-  delete<T>(config: CYRequestConfig): Promise<T> {
+  delete<T>(config: CYRequestConfig<T>): Promise<T> {
     return this.request({ ...config, method: 'DELETE' })
   }
-  patch<T>(config: CYRequestConfig): Promise<T> {
+  patch<T>(config: CYRequestConfig<T>): Promise<T> {
     return this.request({ ...config, method: 'PATCH' })
   }
 }
