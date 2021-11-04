@@ -10,7 +10,7 @@
         <el-input v-model="account.name"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="account.password"></el-input>
+        <el-input v-model="account.password" show-password></el-input>
       </el-form-item>
     </el-form>
   </div>
@@ -20,17 +20,26 @@
 import { defineComponent, reactive, ref } from 'vue'
 import { rules } from '../config/account-config'
 import { ElForm } from 'element-plus'
+import localCache from '@/utils/cache'
 export default defineComponent({
   setup() {
     const account = reactive({
-      name: '',
-      password: ''
+      name: localCache.getCache('name') ?? '',
+      password: localCache.getCache('password') ?? ''
     })
+    // InstanceType 获取构造函数类型的实例类型。
     const formRef = ref<InstanceType<typeof ElForm>>()
-    const loginAccount = () => {
+    const loginAccount = (isChecked: boolean) => {
       formRef.value?.validate((valid) => {
         if (valid) {
-          console.log('登录逻辑')
+          // 判断是否记住密码
+          if (isChecked) {
+            localCache.setCache('name', account.name)
+            localCache.setCache('password', account.password)
+          } else {
+            localCache.removeCache('name')
+            localCache.removeCache('password')
+          }
         }
       })
     }

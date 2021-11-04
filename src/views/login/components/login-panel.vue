@@ -44,7 +44,7 @@ export default defineComponent({
     const isChecked = ref(false)
     const accountRef = ref<InstanceType<typeof loginAccount>>()
     const handleLoginClick = () => {
-      accountRef.value?.loginAccount()
+      accountRef.value?.loginAccount(isChecked.value)
     }
     return {
       isChecked,
