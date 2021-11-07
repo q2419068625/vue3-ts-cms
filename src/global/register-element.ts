@@ -1,6 +1,8 @@
 import { App } from 'vue'
 
 import * as ElIconModules from '@element-plus/icons'
+// 单独引入loading 样式
+import 'element-plus/theme-chalk/el-loading.css'
 
 // 将el-icon的组件名称AbbbCddd转化为i-abbb-cddd形式
 // 此前用switch做组件名时因关键字重复报错，所以格式统一加了前缀

@@ -5,8 +5,6 @@ import router from '@/router/index'
 import store from '@/store/index'
 import CYRequest from '@/service/index'
 import 'normalize.css'
-// 单独引入loading 样式
-import 'element-plus/theme-chalk/el-loading.css'
 const app = createApp(App)
 
 registerApp(app)
