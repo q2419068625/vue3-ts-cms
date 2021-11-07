@@ -31,7 +31,7 @@ class CYRequest {
           this.loading = ElLoading.service({
             lock: true,
             text: '加载中...',
-            background: 'rgba(0,0,0,0.2)'
+            background: 'rgba(0, 0, 0, 0.7)'
           })
         }
         return config
