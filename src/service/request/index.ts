@@ -3,6 +3,7 @@ import type { AxiosInstance } from 'axios'
 import type { CYRequestInterceptors, CYRequestConfig } from './type'
 import { ElLoading } from 'element-plus'
 import type { ILoadingInstance } from 'element-plus/lib/components/loading/src/loading.type'
+import localCache from '@/utils/cache'
 const defaultLoading = true
 class CYRequest {
   instance: AxiosInstance
@@ -23,7 +24,7 @@ class CYRequest {
     )
     this.instance.interceptors.request.use(
       (config) => {
-        const token = '123'
+        const token = localCache.getCache('token')
         if (token) {
           config.headers!.Authorization = `Bearer ${token}`
         }

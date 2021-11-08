@@ -19,7 +19,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { rules } from '../config/account-config'
-import { ElForm, ElLoading } from 'element-plus'
+import { ElForm } from 'element-plus'
 import localCache from '@/utils/cache'
 import { useStore } from 'vuex'
 export default defineComponent({
