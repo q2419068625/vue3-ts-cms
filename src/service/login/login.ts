@@ -13,6 +13,14 @@ export const login = (account: IAccount) => {
 
 export const getUserInfo = (id: string) => {
   return CYRequest.get<IDataType>({
-    url: LoginApi.userinfo + id
+    url: LoginApi.userinfo + id,
+    showLoading: false
+  })
+}
+
+export const getUserMenu = (id: string) => {
+  return CYRequest.get<IDataType>({
+    url: `/role/${id}/menu`,
+    showLoading: false
   })
 }
