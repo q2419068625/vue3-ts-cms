@@ -22,7 +22,15 @@ import {
   ElInput,
   ElCheckbox,
   ElLink,
-  ElLoading
+  ElLoading,
+  ElContainer,
+  ElAside,
+  ElHeader,
+  ElMain,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItem,
+  ElMenuItemGroup
 } from 'element-plus'
 const components = [
   ElButton,
@@ -35,7 +43,15 @@ const components = [
   ElFormItem,
   ElInput,
   ElCheckbox,
-  ElLink
+  ElLink,
+  ElContainer,
+  ElAside,
+  ElHeader,
+  ElMain,
+  ElMenu,
+  ElSubMenu,
+  ElMenuItem,
+  ElMenuItemGroup
 ]
 const plugins = [ElLoading]
 export function registerElement(app: App): void {
