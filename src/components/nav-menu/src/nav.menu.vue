@@ -20,9 +20,11 @@
               <span>{{ item.name }}</span>
             </template>
             <template v-for="subItem in item.children" :key="subItem.id">
-              <el-menu-item :index="subItem.id + ''">{{
-                subItem.name
-              }}</el-menu-item>
+              <el-menu-item
+                :index="subItem.id + ''"
+                @click="handleClick(subItem)"
+                >{{ subItem.name }}</el-menu-item
+              >
             </template>
           </el-sub-menu>
         </template>
@@ -39,6 +41,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from '@/store/index'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   props: {
     collapse: {
@@ -48,8 +51,15 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
+    const router = useRouter()
     const userMenus = computed(() => store.state.login.menus)
+    const handleClick = (item: any) => {
+      router.push({
+        path: item.url ?? '/notFound'
+      })
+    }
     return {
+      handleClick,
       userMenus
     }
   }

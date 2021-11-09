@@ -10,9 +10,9 @@ const loginModule: Module<ILoginAccount, IRootState> = {
   namespaced: true,
   state() {
     return {
-      token: localCache.getCache('token') ?? '',
-      userInfo: localCache.getCache('userInfo') ?? {},
-      menus: localCache.getCache('menus') ?? []
+      token: '',
+      userInfo: {},
+      menus: []
     }
   },
   mutations: {
@@ -24,7 +24,10 @@ const loginModule: Module<ILoginAccount, IRootState> = {
     },
     changeMenus(state, menus: any) {
       state.menus = menus
-      mapMenusToRoutes(menus)
+      const routes = mapMenusToRoutes(menus)
+      routes.forEach((route) => {
+        router.addRoute('Main', route)
+      })
     }
   },
   actions: {
@@ -41,6 +44,20 @@ const loginModule: Module<ILoginAccount, IRootState> = {
       commit('changeMenus', menus.data.data)
       localCache.setCache('menus', menus.data.data)
       router.push('/main')
+    },
+    loadLocalLogin({ commit }) {
+      const token = localCache.getCache('token')
+      if (token) {
+        commit('changeToken', token)
+      }
+      const userInfo = localCache.getCache('userInfo')
+      if (userInfo) {
+        commit('changeUserInfo', userInfo)
+      }
+      const userMenus = localCache.getCache('menus')
+      if (userMenus) {
+        commit('changeMenus', userMenus)
+      }
     }
   }
 }
