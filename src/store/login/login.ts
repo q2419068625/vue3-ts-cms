@@ -5,6 +5,7 @@ import { IAccount } from '@/service/login/types'
 import { login, getUserInfo, getUserMenu } from '@/service/login/login'
 import localCache from '@/utils/cache'
 import router from '@/router'
+import { mapMenusToRoutes } from '@/utils/mapMenus'
 const loginModule: Module<ILoginAccount, IRootState> = {
   namespaced: true,
   state() {
@@ -23,6 +24,7 @@ const loginModule: Module<ILoginAccount, IRootState> = {
     },
     changeMenus(state, menus: any) {
       state.menus = menus
+      mapMenusToRoutes(menus)
     }
   },
   actions: {
