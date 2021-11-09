@@ -30,7 +30,9 @@ import {
   ElMenu,
   ElSubMenu,
   ElMenuItem,
-  ElMenuItemGroup
+  ElMenuItemGroup,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 } from 'element-plus'
 const components = [
   ElButton,
@@ -51,7 +53,9 @@ const components = [
   ElMenu,
   ElSubMenu,
   ElMenuItem,
-  ElMenuItemGroup
+  ElMenuItemGroup,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 ]
 const plugins = [ElLoading]
 export function registerElement(app: App): void {

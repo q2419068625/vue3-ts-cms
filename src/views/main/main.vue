@@ -65,7 +65,6 @@ export default defineComponent({
 
 .el-header,
 .el-footer {
-  display: flex;
   color: #333;
   text-align: center;
   align-items: center;
