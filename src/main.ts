@@ -10,7 +10,7 @@ const app = createApp(App)
 
 registerApp(app)
 
-app.use(router)
 app.use(store)
 setupStore()
+app.use(router)
 app.mount('#app')
