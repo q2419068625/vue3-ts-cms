@@ -1,19 +1,28 @@
 <template>
   <div class="user">
-    <cy-form v-bind="formCofig" />
+    <page-search :searchFormConfig="formCofig" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import cyForm from '@/base-ui/from/index'
+import { defineComponent, ref } from 'vue'
 import { formCofig } from './config/searchConfig'
+import PageSearch from '@/components/page-search'
 export default defineComponent({
   name: 'user',
-  components: { cyForm },
+  components: {
+    PageSearch
+  },
   setup() {
+    const formData = ref({
+      name: '',
+      password: '',
+      motion: '',
+      time: ''
+    })
     return {
-      formCofig
+      formCofig,
+      formData
     }
   }
 })
