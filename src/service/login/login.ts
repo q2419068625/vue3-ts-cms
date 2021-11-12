@@ -1,5 +1,6 @@
 import CYRequest from '../index'
-import { IAccount, IDataType } from './types'
+import { IAccount } from './types'
+import { IDataType } from '@/service/types'
 enum LoginApi {
   AccountLogin = '/login',
   userinfo = '/users/'
