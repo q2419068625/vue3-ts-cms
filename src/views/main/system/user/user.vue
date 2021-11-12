@@ -1,18 +1,23 @@
 <template>
   <div class="user">
     <page-search :searchFormConfig="formCofig" />
+    <div class="content">
+      <cy-table :data="userList" :propList="propList" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useStore } from 'vuex'
+import { computed, defineComponent, ref } from 'vue'
+import { useStore } from '@/store'
 import { formCofig } from './config/searchConfig'
 import PageSearch from '@/components/page-search'
+import cyTable from '@/base-ui/table/index'
 export default defineComponent({
   name: 'user',
   components: {
-    PageSearch
+    PageSearch,
+    cyTable
   },
   setup() {
     //  store
@@ -24,6 +29,8 @@ export default defineComponent({
         size: 10
       }
     })
+    const userList = computed(() => store.state.system.userList)
+    const userCount = computed(() => store.state.system.userCount)
     // data
     const formData = ref({
       name: '',
@@ -31,12 +38,26 @@ export default defineComponent({
       motion: '',
       time: ''
     })
+    const propList = [
+      { prop: 'name', label: '用户名', minWidth: '100' },
+      { prop: 'realname', label: '真实姓名', minWidth: '100' },
+      { prop: 'cellphone', label: '手机号码', minWidth: '100' },
+      { prop: 'enable', label: '状态', minWidth: '100', slotName: 'status' }
+    ]
     return {
       formCofig,
-      formData
+      formData,
+      userList,
+      userCount,
+      propList
     }
   }
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.content {
+  padding: 20px;
+  border-top: 20px solid #f5f5f5;
+}
+</style>
