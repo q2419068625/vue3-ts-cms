@@ -6,7 +6,13 @@
           :prop="item.prop"
           :label="item.label"
           :min-width="item.minWidth"
-        />
+        >
+          <template #default="scope">
+            <slot :name="item.slotName" :row="scope.row">
+              {{ scope.row[item.prop] }}
+            </slot>
+          </template>
+        </el-table-column>
       </template>
     </el-table>
   </div>

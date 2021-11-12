@@ -2,7 +2,11 @@
   <div class="user">
     <page-search :searchFormConfig="formCofig" />
     <div class="content">
-      <cy-table :data="userList" :propList="propList" />
+      <cy-table :data="userList" :propList="propList">
+        <template #status="scope">
+          <el-button>{{ scope.row.enable ? '启用' : '禁用' }}</el-button>
+        </template>
+      </cy-table>
     </div>
   </div>
 </template>
