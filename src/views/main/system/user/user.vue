@@ -6,6 +6,12 @@
         <template #status="scope">
           <el-button>{{ scope.row.enable ? '启用' : '禁用' }}</el-button>
         </template>
+        <template #create="scope">
+          {{ $filters.formatTime(scope.row.createAt) }}
+        </template>
+        <template #update="scope">
+          {{ $filters.formatTime(scope.row.updateAt) }}
+        </template>
       </cy-table>
     </div>
   </div>
@@ -46,7 +52,19 @@ export default defineComponent({
       { prop: 'name', label: '用户名', minWidth: '100' },
       { prop: 'realname', label: '真实姓名', minWidth: '100' },
       { prop: 'cellphone', label: '手机号码', minWidth: '100' },
-      { prop: 'enable', label: '状态', minWidth: '100', slotName: 'status' }
+      { prop: 'enable', label: '状态', minWidth: '100', slotName: 'status' },
+      {
+        prop: 'createAt',
+        label: '创建时间',
+        minWidth: '100',
+        slotName: 'create'
+      },
+      {
+        prop: 'updateAt',
+        label: '更新时间',
+        minWidth: '100',
+        slotName: 'update'
+      }
     ]
     return {
       formCofig,

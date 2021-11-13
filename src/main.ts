@@ -6,10 +6,12 @@ import store from '@/store/index'
 import { setupStore } from '@/store/index'
 import 'normalize.css'
 import '@/styles/index.scss'
+
+import registerProperties from '@/global/register-properties'
 const app = createApp(App)
 
 registerApp(app)
-
+registerProperties(app)
 app.use(store)
 setupStore()
 app.use(router)
