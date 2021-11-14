@@ -3,12 +3,17 @@
     <page-search :searchFormConfig="formCofig" />
     <div class="content">
       <cy-table
+        title="标题"
         :data="userList"
         :propList="propList"
         :showIndexColumn="showIndexColumn"
         :showSelectColumn="showSelectColumn"
         @selectionChange="handleSelectionChange"
       >
+        <!-- 1.header中的插槽 -->
+        <template #headerHandler>
+          <el-button type="primary" size="medium">新建用户</el-button>
+        </template>
         <template #status="scope">
           <el-button>{{ scope.row.enable ? '启用' : '禁用' }}</el-button>
         </template>
