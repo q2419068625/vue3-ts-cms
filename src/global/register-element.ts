@@ -40,7 +40,6 @@ import {
 } from 'element-plus'
 const components = [
   ElButton,
-  ElTable,
   ElAlert,
   ElTabs,
   ElTabPane,

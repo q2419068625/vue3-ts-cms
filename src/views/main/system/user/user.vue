@@ -2,7 +2,13 @@
   <div class="user">
     <page-search :searchFormConfig="formCofig" />
     <div class="content">
-      <cy-table :data="userList" :propList="propList">
+      <cy-table
+        :data="userList"
+        :propList="propList"
+        :showIndexColumn="showIndexColumn"
+        :showSelectColumn="showSelectColumn"
+        @selectionChange="handleSelectionChange"
+      >
         <template #status="scope">
           <el-button>{{ scope.row.enable ? '启用' : '禁用' }}</el-button>
         </template>
@@ -11,6 +17,20 @@
         </template>
         <template #update="scope">
           {{ $filters.formatTime(scope.row.updateAt) }}
+        </template>
+        <template #handle>
+          <el-button type="primary" size="mini">
+            <el-icon :size="10">
+              <i-edit />
+            </el-icon>
+            编辑
+          </el-button>
+          <el-button type="danger" size="mini">
+            <el-icon :size="10">
+              <i-delete />
+            </el-icon>
+            删除
+          </el-button>
         </template>
       </cy-table>
     </div>
@@ -48,6 +68,8 @@ export default defineComponent({
       motion: '',
       time: ''
     })
+    const showIndexColumn = ref(true)
+    const showSelectColumn = ref(true)
     const propList = [
       { prop: 'name', label: '用户名', minWidth: '100' },
       { prop: 'realname', label: '真实姓名', minWidth: '100' },
@@ -64,14 +86,22 @@ export default defineComponent({
         label: '更新时间',
         minWidth: '100',
         slotName: 'update'
-      }
+      },
+      { label: '操作', minWidth: '120', slotName: 'handle' }
     ]
+    // func
+    const handleSelectionChange = (value: any) => {
+      console.log(value)
+    }
     return {
       formCofig,
       formData,
       userList,
       userCount,
-      propList
+      propList,
+      showIndexColumn,
+      showSelectColumn,
+      handleSelectionChange
     }
   }
 })
