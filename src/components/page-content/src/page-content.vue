@@ -1,6 +1,11 @@
 <template>
   <div class="page-content">
-    <hy-table :data="dataList" v-bind="contentTableConfig">
+    <hy-table
+      :data="dataList"
+      :listCount="listCount"
+      v-bind="contentTableConfig"
+      v-model:page="pageInfo"
+    >
       <!-- 1.header中的插槽 -->
       <template #headerHandler>
         <el-button type="primary" size="medium">新建用户</el-button>
@@ -37,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref, watch } from 'vue'
 import { useStore } from '@/store'
 
 import HyTable from '@/base-ui/table'
@@ -60,25 +65,29 @@ export default defineComponent({
     const store = useStore()
 
     const getPageData = (params: any = {}) => {
-      console.log(params)
       store.dispatch('system/getPageListAction', {
         pageName: props.pageName,
         queryInfo: {
-          offset: 0,
-          size: 10,
+          offset: pageInfo.value.currentPage,
+          size: pageInfo.value.pageSize,
           ...params
         }
       })
     }
+    // 1.双向绑定pageInfo
+    const pageInfo = ref({ currentPage: 0, pageSize: 10 })
+    watch(pageInfo, () => getPageData())
     getPageData()
     const dataList = computed(() =>
       store.getters[`system/pageListData`](props.pageName)
     )
-    console.log(dataList.value)
-    // const userCount = computed(() => store.state.system.userCount)
-
+    const listCount = computed(() =>
+      store.getters[`system/pageListCount`](props.pageName)
+    )
     return {
       dataList,
+      listCount,
+      pageInfo,
       getPageData
     }
   }
