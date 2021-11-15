@@ -1,7 +1,12 @@
 <template>
   <div class="user">
-    <page-search :searchFormConfig="formCofig" />
+    <page-search
+      :searchFormConfig="searchFormConfig"
+      @handleResetClick="handleResetClick"
+      @handleSearchClick="handleSearchClick"
+    />
     <page-content
+      ref="pageContentRef"
       :contentTableConfig="contentTableConfig"
       pageName="users"
     ></page-content>
@@ -9,8 +14,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { formCofig } from './config/searchConfig'
+import { defineComponent, ref } from 'vue'
+import { searchFormConfig } from './config/searchConfig'
 import { contentTableConfig } from './config/content.config'
 import PageSearch from '@/components/page-search'
 import PageContent from '@/components/page-content'
@@ -21,9 +26,21 @@ export default defineComponent({
     PageContent
   },
   setup() {
+    const pageContentRef = ref<InstanceType<typeof PageContent>>()
+    const handleResetClick = () => {
+      pageContentRef.value?.getPageData()
+    }
+    console.log(pageContentRef)
+    const handleSearchClick = (params: any) => {
+      console.log(pageContentRef.value)
+      pageContentRef.value?.getPageData(params)
+    }
     return {
-      formCofig,
-      contentTableConfig
+      searchFormConfig,
+      contentTableConfig,
+      handleResetClick,
+      handleSearchClick,
+      pageContentRef
     }
   }
 })

@@ -1,6 +1,6 @@
 type IFormType = 'input' | 'password' | 'select' | 'datepicker'
 export interface IFormItem {
-  filed: string
+  field: string
   type: IFormType
   label: string
   rules?: any[]

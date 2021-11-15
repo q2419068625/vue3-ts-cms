@@ -14,12 +14,12 @@
                 <el-input
                   :placeholder="item.placeholder"
                   :show-password="item.type === 'password'"
-                  v-model="formData[`${item.filed}`]"
+                  v-model="formData[`${item.field}`]"
                 ></el-input>
               </template>
               <template v-else-if="item.type === 'select'">
                 <el-select
-                  v-model="formData[`${item.filed}`]"
+                  v-model="formData[`${item.field}`]"
                   :placeholder="item.placeholder"
                   style="width: 100%"
                 >
@@ -35,7 +35,7 @@
               <template v-else-if="item.type === 'datepicker'">
                 <el-date-picker
                   v-bind="item.otherOptions"
-                  v-model="formData[`${item.filed}`]"
+                  v-model="formData[`${item.field}`]"
                   style="width: 100%"
                 ></el-date-picker>
               </template>
