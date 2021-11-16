@@ -29,10 +29,14 @@
       </template>
       <template #handler>
         <div class="handle-btns">
-          <el-button icon="el-icon-edit" size="mini" type="text"
+          <el-button v-if="isUpdate" icon="el-icon-edit" size="mini" type="text"
             >编辑</el-button
           >
-          <el-button icon="el-icon-delete" size="mini" type="text"
+          <el-button
+            v-if="isDelete"
+            icon="el-icon-delete"
+            size="mini"
+            type="text"
             >删除</el-button
           >
         </div>
@@ -56,7 +60,7 @@ import { defineComponent, computed, ref, watch } from 'vue'
 import { useStore } from '@/store'
 
 import HyTable from '@/base-ui/table'
-
+import { usePermission } from '@/hooks/use-permission'
 export default defineComponent({
   components: {
     HyTable
@@ -75,6 +79,7 @@ export default defineComponent({
     const store = useStore()
 
     const getPageData = (params: any = {}) => {
+      if (!isQuery) return
       store.dispatch('system/getPageListAction', {
         pageName: props.pageName,
         queryInfo: {
@@ -84,6 +89,11 @@ export default defineComponent({
         }
       })
     }
+    // 0.获取操作的权限
+    const isCreate = usePermission(props.pageName, 'create')
+    const isUpdate = usePermission(props.pageName, 'update')
+    const isDelete = usePermission(props.pageName, 'delete')
+    const isQuery = usePermission(props.pageName, 'query')
     // 1.双向绑定pageInfo
     const pageInfo = ref({ currentPage: 0, pageSize: 10 })
     watch(pageInfo, () => getPageData())
@@ -109,7 +119,11 @@ export default defineComponent({
       listCount,
       pageInfo,
       getPageData,
-      otherPropSlots
+      otherPropSlots,
+      isCreate,
+      isUpdate,
+      isDelete,
+      isQuery
     }
   }
 })
