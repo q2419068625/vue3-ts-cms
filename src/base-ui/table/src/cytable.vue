@@ -25,6 +25,7 @@
           :prop="item.prop"
           :label="item.label"
           :min-width="item.minWidth"
+          show-overflow-tooltip
         >
           <template #default="scope">
             <slot :name="item.slotName" :row="scope.row">
