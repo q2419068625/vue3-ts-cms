@@ -8,7 +8,9 @@
     >
       <!-- 1.header中的插槽 -->
       <template #headerHandler>
-        <el-button type="primary" size="medium">新建用户</el-button>
+        <el-button type="primary" size="medium" @click="handleNewClick"
+          >新建用户</el-button
+        >
       </template>
 
       <!-- 2.列中的插槽 -->
@@ -29,7 +31,12 @@
       </template>
       <template #handler="scope">
         <div class="handle-btns">
-          <el-button v-if="isUpdate" icon="el-icon-edit" size="mini" type="text"
+          <el-button
+            v-if="isUpdate"
+            icon="el-icon-edit"
+            size="mini"
+            type="text"
+            @click="handleEditClick(scope.row)"
             >编辑</el-button
           >
           <el-button
@@ -76,7 +83,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const store = useStore()
 
     const getPageData = (params: any = {}) => {
@@ -119,8 +126,14 @@ export default defineComponent({
     const handleDeleteClick = (item: any) => {
       store.dispatch('system/deletePageDataAction', {
         pageName: props.pageName,
-        id: item.id
+        id: item.id``
       })
+    }
+    const handleNewClick = () => {
+      emit('newBtnClick')
+    }
+    const handleEditClick = (item: any) => {
+      emit('editBtnClick', item)
     }
     return {
       dataList,
@@ -132,7 +145,9 @@ export default defineComponent({
       isUpdate,
       isDelete,
       isQuery,
-      handleDeleteClick
+      handleDeleteClick,
+      handleNewClick,
+      handleEditClick
     }
   }
 })

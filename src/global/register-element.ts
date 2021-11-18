@@ -38,7 +38,8 @@ import {
   ElDatePicker,
   ElTableColumn,
   ElPagination,
-  ElImage
+  ElImage,
+  ElDialog
 } from 'element-plus'
 const components = [
   ElButton,
@@ -67,7 +68,8 @@ const components = [
   ElTable,
   ElTableColumn,
   ElPagination,
-  ElImage
+  ElImage,
+  ElDialog
 ]
 const plugins = [ElLoading]
 export function registerElement(app: App): void {
